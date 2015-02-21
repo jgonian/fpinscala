@@ -139,7 +139,18 @@ object PolymorphicFunctions {
 
   // Exercise 2: Implement a polymorphic function to check whether
   // an `Array[A]` is sorted
-  def isSorted[A](as: Array[A], gt: (A,A) => Boolean): Boolean = ???
+  def isSorted[A](as: Array[A], gt: (A,A) => Boolean): Boolean = {
+    @tailrec
+    def loop(i: Int): Boolean = {
+      if (i == as.length - 2) gt(as(i), as(i + 1))
+      else {
+        if (gt(as(i), as(i + 1))) loop(i + 1)
+        else false
+      }
+    }
+    if (as.isEmpty) true
+    else loop(0)
+  }
 
   // Polymorphic functions are often so constrained by their type
   // that they only have one implementation! Here's an example:

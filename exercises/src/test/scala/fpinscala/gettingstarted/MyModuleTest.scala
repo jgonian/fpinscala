@@ -1,6 +1,7 @@
 package fpinscala.gettingstarted
 
 import fpinscala.gettingstarted.MyModule._
+import fpinscala.gettingstarted.PolymorphicFunctions._
 import org.scalatest.WordSpec
 
 class MyModuleTest extends WordSpec {
@@ -21,4 +22,23 @@ class MyModuleTest extends WordSpec {
     }
   }
 
+  "Exercise 2" should {
+    "Check whether empty Array[] is sorted" in {
+      assert(isSorted(Array(), (x: Int, y: Int) => x > y))
+    }
+
+    "Check whether Array[Int] is sorted" in {
+      assert(isSorted(Array(1, 2, 2, 3, 4), (x: Int, y: Int) => x <= y))
+      assert(!isSorted(Array(5, 2, 3, 4), (x: Int, y: Int) => x <= y))
+      assert(isSorted(Array(4, 3, 2, 1), (x: Int, y: Int) => x > y))
+      assert(!isSorted(Array(4, 3, 1, 2), (x: Int, y: Int) => x > y))
+    }
+
+    "Check whether Array[String] is sorted" in {
+      assert(isSorted(Array("a", "b", "c"), (x: String, y: String) => x < y))
+      assert(!isSorted(Array("c", "a", "b"), (x: String, y: String) => x > y))
+
+      assert(isSorted(Array("aaaa", "aa", "aa", "a"), (x: String, y: String) => x.size >= y.size))
+    }
+  }
 }
