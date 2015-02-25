@@ -41,4 +41,35 @@ class MyModuleTest extends WordSpec {
       assert(isSorted(Array("aaaa", "aa", "aa", "a"), (x: String, y: String) => x.size >= y.size))
     }
   }
+
+  "Exercise 3" should {
+    "return partially applied function" in {
+      val f: (String, Int) => Boolean = (a, b) => a.length == b
+
+      val partial: (Int) => Boolean = partial1("abc", f)
+
+      assert(partial(3))
+      assert(!partial(5))
+    }
+  }
+
+  "Exercise 4" should {
+    "return curried function" in {
+      val f: (Int, String) => Boolean = (a, b) => a == b.length
+
+      val g: (Int) => (String) => Boolean = curry(f)
+
+      assert(f(1, "a") == g(1)("a") == f.curried(1)("a"))
+    }
+  }
+
+  "Exercise 5" should {
+    "return uncurried function" in {
+      val f: (Int) => (String) => Boolean = a => b => a == b.length
+
+      val g: (Int, String) => Boolean = uncurry(f)
+
+      assert(f(1)("a") == g(1, "a") == Function.uncurried(f)(1, "a"))
+    }
+  }
 }
