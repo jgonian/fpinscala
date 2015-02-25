@@ -72,4 +72,14 @@ class MyModuleTest extends WordSpec {
       assert(f(1)("a") == g(1, "a") == Function.uncurried(f)(1, "a"))
     }
   }
+
+  "Exercise 6" should {
+    "compose functions" in {
+      val f: (Int) => (Boolean) = a => a == 1
+      val g: (String => Int) = x => x.length
+
+      assert(compose(f, g)("a"))
+      assert(!compose(f, g)("ab"))
+    }
+  }
 }
