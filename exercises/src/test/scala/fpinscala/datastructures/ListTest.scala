@@ -47,4 +47,16 @@ class ListTest extends WordSpec {
       assert(drop(List(), 2) == Nil)
     }
   }
+
+  "Exercise 3.5 - Implement dropWhile" should {
+    "drop elements while predicate matches" in {
+      assert(dropWhile(List(1,2,4,5,6), (x: Int) => x < 3) == List(4,5,6))
+    }
+    "drop zero elements if predicate does not match" in {
+      assert(dropWhile(List(1,2,4,5,6), (x: Int) => x == 10) == List(1,2,4,5,6))
+    }
+    "drop all predicate matches everything" in {
+      assert(dropWhile(List(1,2,4,5,6), (x: Int) => x < 10) == List())
+    }
+  }
 }
