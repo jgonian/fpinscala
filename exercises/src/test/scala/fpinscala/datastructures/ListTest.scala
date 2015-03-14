@@ -29,4 +29,22 @@ class ListTest extends WordSpec {
       assert(setHead(List(), 5) == Nil)
     }
   }
+
+  "Exercise 3.4 - Implement drop" should {
+    "drop elements" in {
+      assert(drop(List(1,2,3,4), 2) == List(3,4))
+    }
+    "return same list if we drop 0" in {
+      assert(drop(List(1,2,3,4), 0) == List(1,2,3,4))
+    }
+    "return same list if we drop negative number" in {
+      assert(drop(List(1,2,3,4), -1) == List(1,2,3,4))
+    }
+    "return Nil if we drop all the elements" in {
+      assert(drop(List(1,2,3,4), 10) == Nil)
+    }
+    "return Nil if there is nothing to drop" in {
+      assert(drop(List(), 2) == Nil)
+    }
+  }
 }
