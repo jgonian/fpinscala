@@ -113,6 +113,7 @@ class ListTest extends WordSpec with TableDrivenPropertyChecks {
       forAll(data) { (list, acc) =>
         assert(sum(list) == acc)
         assert(sum2(list) == acc)
+        assert(sum3(list) == acc)
       }
     }
 
@@ -126,6 +127,7 @@ class ListTest extends WordSpec with TableDrivenPropertyChecks {
       forAll(data) { (list, res) =>
         assert(product(list) == res)
         assert(product2(list) == res)
+        assert(product3(list) == res)
       }
     }
   }
@@ -138,6 +140,7 @@ class ListTest extends WordSpec with TableDrivenPropertyChecks {
     )
     forAll(data) { (list, len) =>
       assert(length(list) == len)
+      assert(length3(list) == len)
     }
   }
 
