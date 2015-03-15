@@ -81,5 +81,23 @@ class ListTest extends WordSpec {
     }
   }
 
+  "Exercise 3.10 - Implement foldLeft" should {
+    "show that foldRight is not stack-safe" in {
+      intercept[StackOverflowError]{
+        foldRight(List(scala.collection.immutable.List.fill(10000)(1): _*), 0)(_ + _) // will throw a stack overflow error
+      }
+    }
+    "calculate sum using foldLeft" in {
+      assert(foldLeft(List(1, 2, 4), 0)(_ + _) == 7)
+    }
+    "calculate product using foldLeft" in {
+      assert(foldLeft(List(1, 2, 4), 1)(_ * _) == 8)
+      assert(foldLeft(List(1, 2, 0, 4), 1)(_ * _) == 0)
+    }
+    "return the specified element if list is empty" in {
+      assert(foldLeft(List[Int](), 10)(_ + _) == 10)
+    }
+  }
+
 
 }
