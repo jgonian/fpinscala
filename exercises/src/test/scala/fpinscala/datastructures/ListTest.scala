@@ -59,4 +59,16 @@ class ListTest extends WordSpec {
       assert(dropWhile(List(1,2,4,5,6), (x: Int) => x < 10) == List())
     }
   }
+
+  "Exercise 3.6 - Implement init" should {
+    "leave out last element" in {
+      assert(init(List(1,2,3,4)) == List(1,2,3))
+    }
+    "return Nil if there is nothing to leave out" in {
+      assert(init(List()) == Nil)
+    }
+    "return Nil if there is on element to leave out" in {
+      assert(init(List(1)) == Nil)
+    }
+  }
 }
