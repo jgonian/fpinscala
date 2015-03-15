@@ -2,8 +2,9 @@ package fpinscala.datastructures
 
 import fpinscala.datastructures.List._
 import org.scalatest.WordSpec
+import org.scalatest.prop.TableDrivenPropertyChecks
 
-class ListTest extends WordSpec {
+class ListTest extends WordSpec with TableDrivenPropertyChecks {
 
   "pattern matching expression" should {
     "be" in {
@@ -96,6 +97,47 @@ class ListTest extends WordSpec {
     }
     "return the specified element if list is empty" in {
       assert(foldLeft(List[Int](), 10)(_ + _) == 10)
+    }
+  }
+
+  "Exercise 3.11 - Write sum, product, and a function to compute the length of a list using foldLeft." should {
+
+    "compute the sum of a list" in {
+      val data = Table(
+        ("List", "Sum"),
+        (List[Int](), 0),
+        (List(5), 5),
+        (List(5, -5), 0),
+        (List(1, 2, 4), 7)
+      )
+      forAll(data) { (list, acc) =>
+        assert(sum(list) == acc)
+        assert(sum2(list) == acc)
+      }
+    }
+
+    "compute the product of a list" in {
+      val data = Table(
+        ("List", "Res"),
+        (List[Double](), 1),
+        (List(1.0, 2.0, 0.0, 4.0), 0),
+        (List(1.0, 2.0, 4.0), 8.0)
+      )
+      forAll(data) { (list, res) =>
+        assert(product(list) == res)
+        assert(product2(list) == res)
+      }
+    }
+  }
+
+  "compute the length of a list" in {
+    val data = Table(
+      ("List", "Length"),
+      (List(), 0),
+      (List(1,2,3,4,5), 5)
+    )
+    forAll(data) { (list, len) =>
+      assert(length(list) == len)
     }
   }
 
