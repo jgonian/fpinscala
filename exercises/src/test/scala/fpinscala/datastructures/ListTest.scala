@@ -71,4 +71,15 @@ class ListTest extends WordSpec {
       assert(init(List(1)) == Nil)
     }
   }
+
+  "Exercise 3.9 - Compute the length of a list using foldRight" should {
+    "compute length of non empty list" in {
+      assert(length(List("a", "b")) == 2)
+    }
+    "compute length of empty list" in {
+      assert(length(List()) == 0)
+    }
+  }
+
+
 }
