@@ -144,5 +144,17 @@ class ListTest extends WordSpec with TableDrivenPropertyChecks {
     }
   }
 
+  "Exercise 3.12 - Write a function that returns the reverse of a list" should {
+    "should return same if empty" in {
+      assert(reverse(List()) == List())
+    }
+    "should return same if one element" in {
+      assert(reverse(List(1)) == List(1))
+    }
+    "should return reverse if non-empty" in {
+      assert(reverse(List(1,2,3,4)) == List(4,3,2,1))
+    }
+  }
+
 
 }
