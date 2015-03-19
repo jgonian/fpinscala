@@ -156,5 +156,27 @@ class ListTest extends WordSpec with TableDrivenPropertyChecks {
     }
   }
 
+  "Exercise 3.13 - write foldLeft in terms of foldRight and vice-versa" ignore {
 
+  }
+
+  "Exercise 3.14 - Implement append in terms of either foldLeft or foldRight" ignore {}
+
+  "Exercise 3.15 - Concatenate a list of lists into a single list" ignore {}
+
+  "Exercise 3.16 - Transform a list of integers by adding 1 to each element" ignore {}
+
+  "Exercise 3.17 - Turn each value in a List[Double] into a String" ignore {}
+
+  "Exercise 3.18 - Write a function map that generalizes modifying each element in a list while maintaining the structure of the list" ignore {}
+
+  "Exercise 3.19 - Write a function filter that removes elements from a list unless they satisfy a given predicate" ignore {}
+
+  "Exercise 3.20 - Write a function flatMap" ignore {}
+
+  "Exercise 3.21 - Use flatMap to implement filter" ignore {}
+
+  "Exercise 3.22 - Write a function that accepts two lists and constructs a new list by adding corresponding elements" ignore {}
+
+  "Exercise 3.23 - Write a function zipWith" ignore {}
 }
