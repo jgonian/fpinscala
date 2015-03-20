@@ -160,7 +160,21 @@ class ListTest extends WordSpec with TableDrivenPropertyChecks {
 
   }
 
-  "Exercise 3.14 - Implement append in terms of either foldLeft or foldRight" ignore {}
+  "Exercise 3.14 - Implement append in terms of either foldLeft or foldRight" should {
+    "append list of integers" in {
+      val data = Table(
+        ("1st List", "2nd List", "Result"),
+        (List(), List(), List()),
+        (List(), List(3, 4), List(3, 4)),
+        (List(1, 2), List(), List(1, 2)),
+        (List(1, 2, 3), List(4, 5), List(1, 2, 3, 4, 5))
+      )
+      forAll(data) { (a,b,res) =>
+        assert(append(a, b) == res)
+        assert(appendViaFoldRight(a, b) == res)
+      }
+    }
+  }
 
   "Exercise 3.15 - Concatenate a list of lists into a single list" ignore {}
 
