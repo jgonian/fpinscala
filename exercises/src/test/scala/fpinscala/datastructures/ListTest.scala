@@ -252,11 +252,18 @@ class ListTest extends WordSpec with TableDrivenPropertyChecks {
     }
   }
 
-  "Exercise 3.19 - Write a function filter that removes elements from a list unless they satisfy a given predicate" should {
+  "Exercise 3.19 and 3.21 - Write a function filter that removes elements based on a given predicate & Use flatMap to implement filter" should {
     "remove elements" in {
-      assert(filter(List[Int](10, 1, 7, 3, 4))(_ == 5) == List[Int]())
-      assert(filter(List[Int](10, 1, 7, 3, 4))(_ == 4) == List(4))
-      assert(filter(List[Int](10, 1, 7, 3, 4))(_ > 4) == List(10, 7))
+      val data = Table(
+        ("List", "Predicate", "Result"),
+        (List(10, 1, 7, 3, 4), (a: Int) => a == 5, List()),
+        (List(10, 1, 7, 3, 4), (a: Int) => a == 4, List(4)),
+        (List(10, 1, 7, 3, 4), (a: Int) => a > 4, List(10, 7))
+      )
+      forAll(data){ (list, predicate, result) =>
+        assert(filter(list)(predicate) == result)
+        assert(filterViaFlatMap(list)(predicate) == result)
+      }
     }
   }
 
@@ -266,8 +273,6 @@ class ListTest extends WordSpec with TableDrivenPropertyChecks {
       assert(flatMap2(List(1,2,3))(i => List(i, i)) == List(1, 1, 2, 2, 3, 3))
     }
   }
-
-  "Exercise 3.21 - Use flatMap to implement filter" ignore {}
 
   "Exercise 3.22 - Write a function that accepts two lists and constructs a new list by adding corresponding elements" ignore {}
 
