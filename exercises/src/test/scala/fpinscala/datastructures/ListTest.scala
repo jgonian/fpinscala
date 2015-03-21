@@ -243,7 +243,14 @@ class ListTest extends WordSpec with TableDrivenPropertyChecks {
     }
   }
 
-  "Exercise 3.18 - Write a function map that generalizes modifying each element in a list while maintaining the structure of the list" ignore {}
+  "Exercise 3.18 - Write a function map that generalizes modifying each element in a list while maintaining the structure of the list" should {
+    "add 1 to a list of ints" in {
+      assert(map(List(1,2,3))(_ + 1) == List(2, 3, 4))
+    }
+    "turn list of Double to list of Strings" in {
+      assert(map(List(1.0, 2.0, 3.0))(_.toString) == List("1.0", "2.0", "3.0"))
+    }
+  }
 
   "Exercise 3.19 - Write a function filter that removes elements from a list unless they satisfy a given predicate" ignore {}
 
