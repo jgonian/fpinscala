@@ -131,6 +131,7 @@ class ListTest extends WordSpec with TableDrivenPropertyChecks {
       )
       forAll(data){ (list, startValue, result, op) =>
         assert(foldRight(list, startValue)(op) == result)
+        assert(foldRightViaFoldLeft(list, startValue)(op) == result)
       }
     }
 
@@ -143,6 +144,7 @@ class ListTest extends WordSpec with TableDrivenPropertyChecks {
       )
       forAll(data){ (list, startValue, result, op) =>
         assert(foldRight(list, startValue)(op) == result)
+        assert(foldRightViaFoldLeft(list, startValue)(op) == result)
       }
     }
   }
