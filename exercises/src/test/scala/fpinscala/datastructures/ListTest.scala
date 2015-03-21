@@ -236,7 +236,12 @@ class ListTest extends WordSpec with TableDrivenPropertyChecks {
     }
   }
 
-  "Exercise 3.17 - Turn each value in a List[Double] into a String" ignore {}
+  "Exercise 3.17 - Turn each value in a List[Double] into a String" should {
+    "convert values" in {
+      assert(double2String(List[Double]()) == List[String]())
+      assert(double2String(List[Double](1.0, 2.0, 3.0)) == List("1.0", "2.0", "3.0"))
+    }
+  }
 
   "Exercise 3.18 - Write a function map that generalizes modifying each element in a list while maintaining the structure of the list" ignore {}
 
