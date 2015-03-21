@@ -82,21 +82,68 @@ class ListTest extends WordSpec with TableDrivenPropertyChecks {
     }
   }
 
-  "Exercise 3.10 - Implement foldLeft" should {
+  "Exercise 3.10 & Exercise 3.13 - (write foldLeft in terms of foldRight and vice-versa) - foldLeft & foldRight" should {
+
     "show that foldRight is not stack-safe" in {
       intercept[StackOverflowError]{
         foldRight(List(scala.collection.immutable.List.fill(10000)(1): _*), 0)(_ + _) // will throw a stack overflow error
       }
     }
-    "calculate sum using foldLeft" in {
-      assert(foldLeft(List(1, 2, 4), 0)(_ + _) == 7)
+
+    "execute foldLeft operations on list of Ints" in {
+      val sum = (a: Int, b: Int) => a + b
+      val multiply = (a: Int, b: Int) => a * b
+
+      val data = Table(
+        ("List", "Start value", "Result", "Binary operator"),
+        (List(1, 2, 4), 0, 7, sum),
+        (List[Int](), 10, 10, sum),
+        (List(1, 2, 4), 1, 8, multiply),
+        (List(1, 2, 0, 4), 1, 0, multiply)
+      )
+      forAll(data){ (list, startValue, result, op) =>
+        assert(foldLeft(list, startValue)(op) == result)
+      }
     }
-    "calculate product using foldLeft" in {
-      assert(foldLeft(List(1, 2, 4), 1)(_ * _) == 8)
-      assert(foldLeft(List(1, 2, 0, 4), 1)(_ * _) == 0)
+
+    "execute foldLeft operations on list of Strings" in {
+      val concat = (a: String, b: String) => a + " " + b
+
+      val data = Table(
+        ("List", "Start value", "Result", "Binary operator"),
+        (List("Hello", "World", "!"), "Bob says:", "Bob says: Hello World !", concat)
+      )
+      forAll(data){ (list, startValue, result, op) =>
+        assert(foldLeft(list, startValue)(op) == result)
+      }
     }
-    "return the specified element if list is empty" in {
-      assert(foldLeft(List[Int](), 10)(_ + _) == 10)
+
+    "execute foldRight operations on list of Ints" in {
+      val sum = (a: Int, b: Int) => a + b
+      val multiply = (a: Int, b: Int) => a * b
+
+      val data = Table(
+        ("List", "Start value", "Result", "Binary operator"),
+        (List(1, 2, 4), 0, 7, sum),
+        (List[Int](), 10, 10, sum),
+        (List(1, 2, 4), 1, 8, multiply),
+        (List(1, 2, 0, 4), 1, 0, multiply)
+      )
+      forAll(data){ (list, startValue, result, op) =>
+        assert(foldRight(list, startValue)(op) == result)
+      }
+    }
+
+    "execute foldRight operations on list of Strings" in {
+      val concat = (a: String, b: String) => a + " " + b
+
+      val data = Table(
+        ("List", "Start value", "Result", "Binary operator"),
+        (List("Hello", "World", "!"), "Bob says:", "Hello World ! Bob says:", concat)
+      )
+      forAll(data){ (list, startValue, result, op) =>
+        assert(foldRight(list, startValue)(op) == result)
+      }
     }
   }
 
@@ -154,10 +201,6 @@ class ListTest extends WordSpec with TableDrivenPropertyChecks {
     "should return reverse if non-empty" in {
       assert(reverse(List(1,2,3,4)) == List(4,3,2,1))
     }
-  }
-
-  "Exercise 3.13 - write foldLeft in terms of foldRight and vice-versa" ignore {
-
   }
 
   "Exercise 3.14 - Implement append in terms of either foldLeft or foldRight" should {
