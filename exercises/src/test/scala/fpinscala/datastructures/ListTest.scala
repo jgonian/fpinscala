@@ -176,7 +176,11 @@ class ListTest extends WordSpec with TableDrivenPropertyChecks {
     }
   }
 
-  "Exercise 3.15 - Concatenate a list of lists into a single list" ignore {}
+  "Exercise 3.15 - Concatenate a list of lists into a single list" should {
+    "Concatenate lists of Ints" in {
+      assert(concat(List(List(1,2,3), List(), List(4,5))) == List(1,2,3,4,5))
+    }
+  }
 
   "Exercise 3.16 - Transform a list of integers by adding 1 to each element" ignore {}
 

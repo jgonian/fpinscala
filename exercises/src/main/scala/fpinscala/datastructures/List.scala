@@ -38,6 +38,8 @@ object List { // `List` companion object. Contains functions for creating and wo
 
   def appendViaFoldRight[A](a: List[A], b: List[A]): List[A] = foldRight(a, b)((x, acc) => Cons(x, acc))
 
+  def concat[A](a: List[List[A]]): List[A] = foldLeft(a, List[A]())(append)
+
   def foldRight[A,B](as: List[A], z: B)(f: (A, B) => B): B = // Utility functions
     as match {
       case Nil => z
