@@ -229,7 +229,12 @@ class ListTest extends WordSpec with TableDrivenPropertyChecks {
     }
   }
 
-  "Exercise 3.16 - Transform a list of integers by adding 1 to each element" ignore {}
+  "Exercise 3.16 - Transform a list of integers by adding 1 to each element" should {
+    "Add 1" in {
+      assert(add1(List[Int]()) == List[Int]())
+      assert(add1(List(1,2,3)) == List(2, 3, 4))
+    }
+  }
 
   "Exercise 3.17 - Turn each value in a List[Double] into a String" ignore {}
 
