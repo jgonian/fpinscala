@@ -252,7 +252,13 @@ class ListTest extends WordSpec with TableDrivenPropertyChecks {
     }
   }
 
-  "Exercise 3.19 - Write a function filter that removes elements from a list unless they satisfy a given predicate" ignore {}
+  "Exercise 3.19 - Write a function filter that removes elements from a list unless they satisfy a given predicate" should {
+    "remove elements" in {
+      assert(filter(List[Int](10, 1, 7, 3, 4))(_ == 5) == List[Int]())
+      assert(filter(List[Int](10, 1, 7, 3, 4))(_ == 4) == List(4))
+      assert(filter(List[Int](10, 1, 7, 3, 4))(_ > 4) == List(10, 7))
+    }
+  }
 
   "Exercise 3.20 - Write a function flatMap" ignore {}
 
