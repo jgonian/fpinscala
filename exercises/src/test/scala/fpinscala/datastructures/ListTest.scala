@@ -260,7 +260,12 @@ class ListTest extends WordSpec with TableDrivenPropertyChecks {
     }
   }
 
-  "Exercise 3.20 - Write a function flatMap" ignore {}
+  "Exercise 3.20 - Write a function flatMap" should {
+    "implement the example from the book" in {
+      assert(flatMap(List(1,2,3))(i => List(i, i)) == List(1, 1, 2, 2, 3, 3))
+      assert(flatMap2(List(1,2,3))(i => List(i, i)) == List(1, 1, 2, 2, 3, 3))
+    }
+  }
 
   "Exercise 3.21 - Use flatMap to implement filter" ignore {}
 
