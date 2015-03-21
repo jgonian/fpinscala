@@ -97,6 +97,8 @@ object List { // `List` companion object. Contains functions for creating and wo
     case Cons(h,t) => foldLeft(t, f(z,h))(f)
   }
 
+  def foldLeftViaFoldRight[A,B](l: List[A], z: B)(f: (B, A) => B): B = foldRight(reverse(l), z)((a,b) => f(b, a))
+
   // recursive, not stack-safe
   def foldLeft2[A,B](l: List[A], z: B)(f: (B, A) => B): B = l match {
     case Nil => z
