@@ -139,4 +139,6 @@ object List { // `List` companion object. Contains functions for creating and wo
     case (Cons(y, ys), Cons(z,zs)) => Cons(op(y, z), zipWith(ys, zs)(op))
   }
 
+  def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = ???
+
 }

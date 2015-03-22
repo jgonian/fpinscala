@@ -290,4 +290,6 @@ class ListTest extends WordSpec with TableDrivenPropertyChecks {
       assert(zipWith(List(1,2,3), List(4,5,6))(_ + _) == List(5,7,9))
     }
   }
+
+  "Exercise 3.24 - (Hard) Implement hasSubsequence" ignore {}
 }
