@@ -274,7 +274,20 @@ class ListTest extends WordSpec with TableDrivenPropertyChecks {
     }
   }
 
-  "Exercise 3.22 - Write a function that accepts two lists and constructs a new list by adding corresponding elements" ignore {}
+  "Exercise 3.22 - Write a function that accepts two lists and constructs a new list by adding corresponding elements" should {
+    "implement the book example" in {
+      assert(add2Lists(Nil, Nil) == Nil)
+      assert(add2Lists(Nil, List(4,5,6)) == Nil)
+      assert(add2Lists(List(1,2,3), Nil) == Nil)
+      assert(add2Lists(List(1,2,3), List(4,5,6)) == List(5,7,9))
+    }
+  }
 
-  "Exercise 3.23 - Write a function zipWith" ignore {}
+  "Exercise 3.23 - Write a function zipWith" should {
+    "implement the book example" in {
+      assert(zipWith(Nil: List[Int], List(4,5,6))(_ + _) == Nil)
+      assert(zipWith(List(1,2,3), Nil: List[Int])(_ + _) == Nil)
+      assert(zipWith(List(1,2,3), List(4,5,6))(_ + _) == List(5,7,9))
+    }
+  }
 }

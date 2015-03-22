@@ -126,4 +126,17 @@ object List { // `List` companion object. Contains functions for creating and wo
   def flatMap2[A, B](as: List[A])(f: A => List[B]): List[B] = concat(map(as)(f))
 
   def filterViaFlatMap[A](as: List[A])(f: A => Boolean): List[A] = flatMap(as)(a => if (f(a)) List(a) else Nil)
+
+  def add2Lists(as1: List[Int], as2: List[Int]): List[Int] = (as1, as2) match {
+    case (_, Nil) => Nil
+    case (Nil, _) => Nil
+    case (Cons(y, ys), Cons(z,zs)) => Cons(y + z, add2Lists(ys, zs))
+  }
+
+  def zipWith[A, B, C](as1: List[A], as2: List[B])(op: (A, B) => C): List[C] = (as1, as2) match {
+    case (_, Nil) => Nil
+    case (Nil, _) => Nil
+    case (Cons(y, ys), Cons(z,zs)) => Cons(op(y, z), zipWith(ys, zs)(op))
+  }
+
 }
