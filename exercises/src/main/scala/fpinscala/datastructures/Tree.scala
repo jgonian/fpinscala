@@ -12,4 +12,19 @@ object Tree {
     case Branch(left, right) => 1 + size(left) + size(right)
   }
 
+  def maximum(t: Tree[Int]): Int = t match {
+    case Leaf(v) => v
+    case Branch(left, right) => maximum(left).max(maximum(right))
+  }
+
+  def depth(t: Tree[Int]): Int = t match {
+    case Leaf(v) => 0
+    case Branch(left, right) => 1 + (depth(left) max depth(right))
+  }
+
+  def map[A, B](t: Tree[A])(f: A => B): Tree[B] = t match {
+    case Leaf(v) => Leaf(f(v))
+    case Branch(left, right) => Branch(map(left)(f), map(right)(f))
+  }
+
 }
