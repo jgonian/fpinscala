@@ -1,6 +1,7 @@
 package fpinscala.errorhandling
 
 
+import scala.collection.immutable.Nil
 import scala.{Either => _, Option => _, Some => _} // hide std library `Option`, `Some` and `Either`, since we are writing our own in this chapter
 
 sealed trait Option[+A] {
@@ -62,5 +63,15 @@ object Option {
     }
   }
 
-  def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] = sys.error("todo")
+  // Inefficient implementation (traverses the list twice, first to convert each element to an Option and a second pass to combine them
+  // def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] = {
+  //  sequence(a.map(f(_)))
+  //}
+
+  def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] = a match {
+    case Nil => Some(Nil)
+    case head :: tail => map2(f(head), traverse(tail)(f))(_ :: _)
+  }
+
+  def sequenceViaTraverse[A](a: List[Option[A]]): Option[List[A]] = traverse(a)(x => x)
 }

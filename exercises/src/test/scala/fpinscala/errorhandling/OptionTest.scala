@@ -101,4 +101,25 @@ class OptionTest extends FunSpec {
     }
   }
 
+  describe("traverse") {
+    it("should return Some[List[A]] if sequence can be transformed") {
+      assert(Option.traverse(List("1", "2", "3"))(a => Some(a.toInt)) == Some(List(1, 2, 3)))
+    }
+    it("should return None if sequence cannot be transformed") {
+      val empty: Option[List[Int]] = None
+      assert(Option.traverse(List("1", "not a number", "3"))(a => Try(a.toInt)) == empty)
+    }
+    it("should return Some with empty list if input sequence is empty") {
+      assert(Option.traverse(List[String]())(a => Try(a.toInt)) == Some(List()))
+    }
+  }
+
+  def Try[A](a: => A): Option[A] = {
+    try {
+      Some(a)
+    } catch {
+      case e: Exception => None
+    }
+  }
+
 }
