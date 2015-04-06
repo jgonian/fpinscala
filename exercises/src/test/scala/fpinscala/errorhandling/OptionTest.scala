@@ -70,4 +70,13 @@ class OptionTest extends FunSpec {
     }
   }
 
+  describe("variance") {
+    it("should return the variance of non-empty seq") {
+      assert(Option.variance(Seq(1.0, 2.0, 3.0, 4.0, 5.0)) == Some(2.0))
+    }
+    it("should return the variance of empty seq") {
+      assert(Option.variance(Seq()) == None)
+    }
+  }
+
 }
