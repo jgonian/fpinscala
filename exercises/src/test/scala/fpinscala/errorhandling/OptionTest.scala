@@ -91,4 +91,14 @@ class OptionTest extends FunSpec {
     }
   }
 
+  describe("sequence") {
+    it("should return an Option[List[A]] if sequence contains defined values") {
+      assert(Option.sequence(List(Some("a"), Some("b"), Some("c"))) == Some(List("a", "b", "c")))
+    }
+    it("should return None if sequence contains undefined values") {
+      val empty: Option[List[String]] = None
+      assert(Option.sequence(List(None, Some("b"), Some("c"))) == empty)
+    }
+  }
+
 }
