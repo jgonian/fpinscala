@@ -1,6 +1,8 @@
 package fpinscala.laziness
 
-import Stream._
+import scala.annotation.tailrec
+import scala.collection.mutable.ListBuffer
+
 trait Stream[+A] {
 
   def foldRight[B](z: => B)(f: (A, => B) => B): B = // The arrow `=>` in front of the argument type `B` means that the function `f` takes its second argument by name and may choose not to evaluate it.
@@ -17,6 +19,34 @@ trait Stream[+A] {
     case Empty => None
     case Cons(h, t) => if (f(h())) Some(h()) else t().find(f)
   }
+
+  def toListRecursive: List[A] = this match {
+    case Cons(h, t) => h() :: t().toListRecursive
+    case _ => Nil
+  }
+
+  def toListTailRecursive: List[A] = {
+    @tailrec
+    def go(xs: Stream[A], acc: List[A]): List[A] = xs match {
+      case Cons(h, t) => go(t(), h() :: acc)
+      case _ => acc
+    }
+    go(this, Nil).reverse
+  }
+
+  // fastest implementation using a mutable ListBuffer. toList() is still _pure_ since the buffer never escapes this method.
+  def toList: List[A] = {
+    val buffer = new ListBuffer[A]()
+    @tailrec
+    def go(xs: Stream[A]): List[A] = xs match {
+      case Cons(h, t) =>
+        buffer.append(h())
+        go(t())
+      case _ => buffer.toList
+    }
+    go(this)
+  }
+
   def take(n: Int): Stream[A] = sys.error("todo")
 
   def drop(n: Int): Stream[A] = sys.error("todo")
