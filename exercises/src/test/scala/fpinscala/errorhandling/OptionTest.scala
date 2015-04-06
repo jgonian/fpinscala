@@ -79,4 +79,16 @@ class OptionTest extends FunSpec {
     }
   }
 
+  describe("map2") {
+    it("should transform if both options are defined") {
+      assert(Option.map2(Some("a"), Some("b"))((a,b) => a + b) == Some("ab"))
+    }
+    it("should return None if any option is undefined") {
+      val empty: Option[String] = None
+      assert(Option.map2(empty, empty)((a,b) => a + b) == empty)
+      assert(Option.map2(empty, Some("b"))((a,b) => a + b) == empty)
+      assert(Option.map2(Some("a"), empty)((a,b) => a + b) == empty)
+    }
+  }
+
 }
