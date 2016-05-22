@@ -13,24 +13,24 @@ object List { // `List` companion object. Contains functions for creating and wo
   def sum(ints: List[Int]): Int = ints match { // A function that uses pattern matching to add up a list of integers
     case Nil => 0 // The sum of the empty list is 0.
     case Cons(x,xs) => x + sum(xs) // The sum of a list starting with `x` is `x` plus the sum of the rest of the list.
-  } 
-  
+  }
+
   def product(ds: List[Double]): Double = ds match {
     case Nil => 1.0
     case Cons(0.0, _) => 0.0
     case Cons(x,xs) => x * product(xs)
   }
-  
+
   def apply[A](as: A*): List[A] = // Variadic function syntax
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
 
   val x = List(1,2,3,4,5) match {
     case Cons(x, Cons(2, Cons(4, _))) => x
-    case Nil => 42 
+    case Nil => 42
     case Cons(x, Cons(y, Cons(3, Cons(4, _)))) => x + y
     case Cons(h, t) => h + sum(t)
-    case _ => 101 
+    case _ => 101
   }
 
   def append[A](a1: List[A], a2: List[A]): List[A] =
@@ -51,10 +51,10 @@ object List { // `List` companion object. Contains functions for creating and wo
 
   def foldRightViaFoldLeft[A,B](l: List[A], z: B)(f: (A, B) => B): B = foldLeft(reverse(l), z)((a,b) => f(b, a))
   
-  def sum2(ns: List[Int]) = 
+  def sum2(ns: List[Int]) =
     foldRight(ns, 0)((x,y) => x + y)
-  
-  def product2(ns: List[Double]) = 
+
+  def product2(ns: List[Double]) =
     foldRight(ns, 1.0)(_ * _) // `_ * _` is more concise notation for `(x,y) => x * y`; see sidebar
 
 
@@ -120,8 +120,6 @@ object List { // `List` companion object. Contains functions for creating and wo
 
   def double2String(l: List[Double]): List[String] = foldRight(l, Nil: List[String])((a, b) => Cons(a.toString , b))
 
-  def map[A,B](l: List[A])(f: A => B): List[B] = foldRight(l, Nil: List[B])((a, b) => Cons(f(a) , b))
-
   def filter[A](as: List[A])(f: A => Boolean): List[A] = foldRight(as, Nil: List[A])((a, b) => if (f(a)) Cons(a, b) else b)
 
   def flatMap[A, B](as: List[A])(f: A => List[B]): List[B] = foldRight(as, Nil: List[B])((h,t) => append(f(h), t))
@@ -144,4 +142,5 @@ object List { // `List` companion object. Contains functions for creating and wo
 
   def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = ???
 
+  def map[A,B](l: List[A])(f: A => B): List[B] = foldRight(l, Nil: List[B])((a, b) => Cons(f(a) , b))
 }

@@ -86,7 +86,7 @@ class ListTest extends WordSpec with TableDrivenPropertyChecks {
 
     "show that foldRight is not stack-safe" in {
       intercept[StackOverflowError]{
-        foldRight(List(scala.collection.immutable.List.fill(10000)(1): _*), 0)(_ + _) // will throw a stack overflow error
+        foldRight(List(scala.collection.immutable.List.fill(100000)(1): _*), 0)(_ + _) // will throw a stack overflow error
       }
     }
 
