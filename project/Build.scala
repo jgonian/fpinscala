@@ -3,7 +3,7 @@ import Keys._
 
 object FPInScalaBuild extends Build {
   val opts = Project.defaultSettings ++ Seq(
-    scalaVersion := "2.11.7",
+    scalaVersion := "2.11.8",
     resolvers += "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"
   )
 
@@ -22,7 +22,8 @@ object FPInScalaBuild extends Build {
             base = file("exercises"),
             settings = opts ++ Seq(
               libraryDependencies ++= Seq(
-                "org.scalatest" %% "scalatest" % "2.2.4" % "test"
+                "org.scalatest" %% "scalatest" % "3.0.3" % "test",
+                "org.scalacheck" %% "scalacheck" % "1.13.4" % "test"
               )
             ))
   lazy val answers =
